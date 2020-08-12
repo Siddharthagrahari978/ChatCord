@@ -79,3 +79,28 @@ const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+// ?For webSocket------------------------------------------
+const { Server } = require('ws');
+const wss = new Server({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
+var HOST = location.origin.replace(/^http/, 'ws')
+var ws = new WebSocket(HOST);
+var el;
+
+ws.onmessage = function (event) {
+  el = document.getElementById('server-time');
+  el.innerHTML = 'Server time: ' + event.data;
+};
+
+//-------------------------------------------------------
