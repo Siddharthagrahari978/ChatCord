@@ -74,13 +74,6 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
-
 // ?For webSocket------------------------------------------
 const { Server } = require('ws');
 const wss = new Server({ server });
@@ -104,3 +97,10 @@ ws.onmessage = function (event) {
 };
 
 //-------------------------------------------------------
+
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
